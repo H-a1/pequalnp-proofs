@@ -83,7 +83,8 @@ theorem PEqualNP.Outside.R_meta_18397_271
       let val (C : Circuit) (x : List Bool) (u : ℕ) : Bool := (C.wires x).getD u false
 
       have gateAt_eq {C : Circuit} {j : ℕ} (hj : j < C.gates.length) : gateAt C j = C.gates[j] := by
-        simp [gateAt, List.getD_eq_getElem?_getD, hj]
+        change C.gates.getD j ⟨GateOp.or, []⟩ = C.gates[j]
+        simp [List.getD_eq_getElem?_getD, hj]
 
       have gateAt_mem {C : Circuit} {j : ℕ} (hj : j < C.gates.length) : gateAt C j ∈ C.gates := by
         rw [gateAt_eq hj]; exact List.getElem_mem hj
